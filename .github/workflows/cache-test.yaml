@@ -31,6 +31,7 @@ jobs:
       - name: Evict cache
         id: evict-cache
         uses: houdini91/cache@master
+        upload-chunk-size: 10737418240
         with:
           path: |
             ~/go/pkg/mod
