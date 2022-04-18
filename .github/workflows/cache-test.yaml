@@ -41,7 +41,7 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile2') }}
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile') }}
 
       - name: random data
         run: |
