@@ -26,7 +26,7 @@ jobs:
 
       - name: random data
         run: |
-          head -c 9G </dev/urandom > randomfile
+          head -c 5G </dev/urandom > randomfile
 # head -c 9739172470 </dev/urandom > randomfile
 # dd if=/dev/zero of=./randomfile bs=4k iflag=fullblock,count_bytes count=10737418230
 # echo "aaa" >> randomfile
@@ -45,7 +45,7 @@ jobs:
 
       - name: random data
         run: |
-          head -c 2G </dev/urandom > randomfile2
+          head -c 5G </dev/urandom > randomfile2
 
       - name: Evict cache2
         id: evict-cache2
