@@ -47,7 +47,7 @@ jobs:
           head -c 1G </dev/urandom > randomfile2
 
       - name: Evict cache
-        id: evict-cache
+        id: evict-cache2
         uses: actions/cache@v2
         with:
           # upload-chunk-size: 10737418240
