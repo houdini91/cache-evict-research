@@ -1,0 +1,22 @@
+name: GitHub Actions Workflow with NPM cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  evict-cache:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+      - name: Restore go cache
+        id: go-cache
+        uses: houdini91/cache@master
+        with:
+          path: |
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
+      - name:
+        run: |
+          ls -lh ~/go/pkg/mod
