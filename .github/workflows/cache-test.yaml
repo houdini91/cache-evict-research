@@ -34,7 +34,7 @@ jobs:
         with:
           upload-chunk-size: 10737418240
           path: |
-            ~/go/pkg/mod
+            randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile') }}
 
       - uses: actions/setup-go@v2
