@@ -33,7 +33,7 @@ jobs:
         id: evict-cache
         uses: houdini91/cache@main 
         with:
-          upload-chunk-size: 10737418240
+          # upload-chunk-size: 10737418240
           path: |
             randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile') }}
