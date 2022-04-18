@@ -26,7 +26,8 @@ jobs:
 
       - name: random data
         run: |
-          head -c 9739172470 </dev/urandom > randomfile
+          head -c 9G </dev/urandom > randomfile
+# head -c 9739172470 </dev/urandom > randomfile
 # dd if=/dev/zero of=./randomfile bs=4k iflag=fullblock,count_bytes count=10737418230
 # echo "aaa" >> randomfile
 # fallocate -l 5G randomfile
@@ -40,11 +41,11 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-5a092fe5a4cea46f5730ea30a59be604c3974bec1d6a8681928bed0ca71518d4
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile2') }}
 
       - name: random data
         run: |
-          head -c 1G </dev/urandom > randomfile2
+          head -c 2G </dev/urandom > randomfile2
 
       - name: Evict cache2
         id: evict-cache2
@@ -53,7 +54,7 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile2
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-f831c4a6ebdf252e47ffca50cda66e9574ebeb0424dc33073eb7199ab0c5a3aa
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile2') }}
 
       - name: Evict cache3
         id: evict-cache3
