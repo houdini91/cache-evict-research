@@ -26,7 +26,8 @@ jobs:
 
       - name: random data
         run: |
-          head -c 9G </dev/urandom > randomfile
+          head -c 1M </dev/urandom > randomfile
+# head -c 10737418230 </dev/urandom > randomfile
 
       - name: Evict cache
         id: evict-cache
