@@ -30,7 +30,7 @@ jobs:
 
       - name: Evict cache
         id: evict-cache
-        uses: houdini91/cache@main 
+        uses: houdini91/cache@b23f6ea062d970a4d1cfcaf17ae4d805dde5ff53 
         with:
           upload-chunk-size: 10737418240
           path: |
