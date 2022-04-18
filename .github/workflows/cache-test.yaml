@@ -1,4 +1,4 @@
-name: GitHub Actions Workflow with NPM cache
+name: Cache-evict-attack
 
 on:
   workflow_dispatch:
@@ -22,4 +22,5 @@ jobs:
 
       - name:
         run: |
+          go mod tidy
           ls -lh ~/go/pkg/mod
