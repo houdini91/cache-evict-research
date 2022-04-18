@@ -46,15 +46,23 @@ jobs:
         run: |
           head -c 1G </dev/urandom > randomfile2
 
-      - name: Evict cache
+      - name: Evict cache2
         id: evict-cache2
         uses: actions/cache@v2
         with:
           # upload-chunk-size: 10737418240
           path: |
             randomfile2
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile') }}
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile2') }}
 
+      - name: Evict cache3
+        id: evict-cache3
+        uses: actions/cache@v2
+        with:
+          # upload-chunk-size: 10737418240
+          path: |
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
       - uses: actions/setup-go@v2
         with:
