@@ -56,8 +56,35 @@ jobs:
             randomfile2
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-467d4b2338d5621eef6ec035617b06632cd9edd5601bfaf8d811853717191607
 
+      - name: random data
+        run: |
+          head -c 5G </dev/urandom > randomfile3
+
       - name: Evict cache3
         id: evict-cache3
+        uses: actions/cache@v2
+        with:
+          # upload-chunk-size: 10737418240
+          path: |
+            randomfile3
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
+      - name: random data
+        run: |
+          head -c 5G </dev/urandom > randomfile4
+
+      - name: Evict cache3
+        id: evict-cache3
+        uses: actions/cache@v2
+        with:
+          # upload-chunk-size: 10737418240
+          path: |
+            randomfile4
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
+
+      - name: Evict cache4
+        id: evict-cache4
         uses: actions/cache@v2
         with:
           # upload-chunk-size: 10737418240
