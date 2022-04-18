@@ -2,6 +2,7 @@ name: Cache-evict-attack
 
 on:
   workflow_dispatch:
+  pash:
 
 env:
   GO_VERSION: "1.18"
@@ -26,7 +27,7 @@ jobs:
       - name: random data
         run: |
           head -c 1M </dev/urandom > randomfile
-          
+
       - name: Evict cache
         id: go-cache
         uses: houdini91/cache@master
