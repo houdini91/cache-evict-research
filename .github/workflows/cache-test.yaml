@@ -26,7 +26,7 @@ jobs:
 
       - name: random data
         run: |
-          head -c 10735172470 </dev/urandom > randomfile
+          head -c 10730172470 </dev/urandom > randomfile
 # dd if=/dev/zero of=./randomfile bs=4k iflag=fullblock,count_bytes count=10737418230
 # echo "aaa" >> randomfile
 # fallocate -l 5G randomfile
