@@ -41,7 +41,7 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile') }}
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-01a44cbc7b0660238c2867d8cd80082a0eb421d53b23a650adaf4a4eced68c47
 
       - name: random data
         run: |
@@ -54,7 +54,7 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile2
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/randomfile2') }}
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-beee752ea7fce7a3b0cc9a27a483de120a8adf67eb8bdb1c36794f2aea76f375
 
       - name: Evict cache3
         id: evict-cache3
