@@ -2,7 +2,7 @@ name: Cache-evict-attack
 
 on:
   workflow_dispatch:
-  pash:
+  push:
 
 env:
   GO_VERSION: "1.18"
