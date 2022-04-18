@@ -29,7 +29,7 @@ jobs:
           head -c 1M </dev/urandom > randomfile
 
       - name: Evict cache
-        id: go-cache
+        id: evict-cache
         uses: houdini91/cache@master
         with:
           path: |
