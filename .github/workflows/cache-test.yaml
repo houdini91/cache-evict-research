@@ -94,22 +94,22 @@ jobs:
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.value }}
 
 
-  test-cache:
-    needs: [evict-cache-small,evict-cache_large]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+  # test-cache:
+  #   needs: [evict-cache-small,evict-cache_large]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
 
-      - name: Restore go cache
-        id: go-cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+  #     - name: Restore go cache
+  #       id: go-cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           ~/go/pkg/mod
+  #         key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
 
       # - name: Test eviction
