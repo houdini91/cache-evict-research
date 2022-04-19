@@ -35,7 +35,7 @@ jobs:
           echo $range
           LIST=$(jq -ncR '[inputs]' <<< "$range")
           echo $LIST
-          echo '::set-output name=value::${LIST}'
+          echo '::set-output name=value::$LIST'
 
   evict-cache:
     needs: [reserve-cache,setup]
