@@ -34,6 +34,7 @@ jobs:
           range=$(seq 0 60)
           LIST=$(jq -ncR '[inputs]' <<< "$range")
           echo $LIST
+          echo 'test name=value::$LIST'
           echo '::set-output name=value::$LIST'
 
   debug-matrix:
@@ -43,7 +44,7 @@ jobs:
     steps:
       - name: random data
         run: |
-          echo ${{ needs.setup.outputs.matrix }}
+          echo ${{needs.setup.outputs.matrix}}
 
 
   evict-cache:
@@ -51,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{ fromJson(needs.setup.outputs.matrix) }}
+        value: ${{fromJson(needs.setup.outputs.matrix)}}
         # size:
           # list your packages here
           # - 5G
