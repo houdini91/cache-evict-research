@@ -31,7 +31,9 @@ jobs:
     steps:
       - id: matrix
         run: |
-          echo '::set-output name=value::["1M", "2M", "3M"]'
+          range=$(seq 0 60)
+          LIST=$(jq -ncR '[inputs]' <<< "$range)
+          echo '::set-output name=value::${LIST}'
 
   evict-cache:
     needs: [reserve-cache,setup]
@@ -39,7 +41,7 @@ jobs:
     strategy:
       matrix:
         value: ${{ fromJson(needs.setup.outputs.matrix) }}
-        size:
+        # size:
           # list your packages here
           # - 5G
           # - 4G
@@ -84,8 +86,8 @@ jobs:
           # - 4
           # - 3
           # - 2
-          - 1
-          - 0
+          # - 1
+          # - 0
         
     steps:
       - name: random data
