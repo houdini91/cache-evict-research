@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: matrix
         run: |
-          echo '::set-output name=value::[\"1M\", \"2M\", \"3M\"]'
+          echo '::set-output name=value::["1M", "2M", "3M"]'
 
   evict-cache:
     needs: [reserve-cache,setup]
