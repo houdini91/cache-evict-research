@@ -43,6 +43,7 @@ jobs:
 
 # head -c 10737418230 </dev/urandom > randomfile
 
+
       - name: Evict cache
         id: evict-cache
         uses: actions/cache@v2
@@ -60,7 +61,6 @@ jobs:
         id: evict-cache2
         uses: actions/cache@v2
         with:
-          # upload-chunk-size: 10737418240
           path: |
             randomfile2
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-467d4b2338d5621eef6ec035617b06632cd9edd5601bfaf8d811853717191607
@@ -69,11 +69,18 @@ jobs:
         run: |
           head -c 5G </dev/urandom > randomfile3
 
+      - name: Test eviction
+        id: test-eviction
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
       - name: Evict cache3
         id: evict-cache3
         uses: actions/cache@v2
         with:
-          # upload-chunk-size: 10737418240
           path: |
             randomfile3
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
@@ -86,20 +93,10 @@ jobs:
         id: evict-cache4
         uses: actions/cache@v2
         with:
-          # upload-chunk-size: 10737418240
           path: |
             randomfile4
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
-
-      - name: Evict cache5
-        id: evict-cache5
-        uses: actions/cache@v2
-        with:
-          # upload-chunk-size: 10737418240
-          path: |
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
       - uses: actions/setup-go@v2
         with:
