@@ -54,7 +54,6 @@ jobs:
       matrix:
         value: ${{fromJson(needs.setup.outputs.matrix)}}
         size:
-          list your packages here
           - 5G
           - 4G
           - 3G
