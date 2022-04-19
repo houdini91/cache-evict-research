@@ -73,7 +73,7 @@ jobs:
             randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.size }}
 
-  evict-cache_small:
+  evict-cache-small:
     needs: [reserve-cache,setup]
     runs-on: ubuntu-latest
     strategy:
@@ -95,7 +95,7 @@ jobs:
 
 
   test-cache:
-    needs: [evict-cache]
+    needs: [evict-cache-small,evict-cache_large]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
