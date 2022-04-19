@@ -34,8 +34,8 @@ jobs:
           range=$(seq 0 60)
           LIST=$(jq -ncR '[inputs]' <<< "$range")
           echo $LIST
-          echo 'test name=value::$LIST'
-          echo ""::set-output name=value::$LIST"
+          echo "test name=value::$LIST"
+          echo "::set-output name=value::$LIST"
 
   debug-matrix:
     needs: [setup]
