@@ -32,7 +32,7 @@ jobs:
       - id: matrix
         run: |
           range=$(seq 0 60)
-          LIST=$(jq -ncR '[inputs]' <<< "$range)
+          LIST=$(jq -ncR '[inputs]' <<< "$range")
           echo '::set-output name=value::${LIST}'
 
   evict-cache:
