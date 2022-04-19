@@ -27,6 +27,12 @@ jobs:
   evict-cache:
     needs: [reserve-cache]
     runs-on: ubuntu-latest
+    matrix:
+      size:
+        # list your packages here
+        - 1M
+        - 3M
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,13 +41,7 @@ jobs:
 
       - name: random data
         run: |
-          head -c 5G </dev/urandom > randomfile
-# head -c 9739172470 </dev/urandom > randomfile
-# dd if=/dev/zero of=./randomfile bs=4k iflag=fullblock,count_bytes count=10737418230
-# echo "aaa" >> randomfile
-# fallocate -l 5G randomfile
-
-# head -c 10737418230 </dev/urandom > randomfile
+          head -c ${{ matrix.size }} </dev/urandom > randomfile
 
 
       - name: Evict cache
@@ -51,22 +51,11 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache1
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.size }}
 
       - name: random data
         run: |
           head -c 5G </dev/urandom > randomfile2
-
-      - name: Evict cache2
-        id: evict-cache2
-        uses: actions/cache@v2
-        with:
-          path: |
-            randomfile2
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache2
-      - name: random data
-        run: |
-          head -c 5G </dev/urandom > randomfile3
 
       # - name: Test eviction
       #   id: test-eviction
