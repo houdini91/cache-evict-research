@@ -51,7 +51,7 @@ jobs:
           # upload-chunk-size: 10737418240
           path: |
             randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-0e0305c777819a43d0da9e3cfcf9ff852c91ec74e78b79012aa1fe8e62b8de5e
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache1
 
       - name: random data
         run: |
@@ -63,44 +63,42 @@ jobs:
         with:
           path: |
             randomfile2
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-467d4b2338d5621eef6ec035617b06632cd9edd5601bfaf8d811853717191607
-
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache2
       - name: random data
         run: |
           head -c 5G </dev/urandom > randomfile3
 
-      - name: Test eviction
-        id: test-eviction
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+      # - name: Test eviction
+      #   id: test-eviction
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       ~/go/pkg/mod
+      #     key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
-      - name: Evict cache3
-        id: evict-cache3
-        uses: actions/cache@v2
-        with:
-          path: |
-            randomfile3
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+      # - name: Evict cache3
+      #   id: evict-cache3
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       randomfile3
+      #     key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache3
 
-      - name: random data
-        run: |
-          head -c 5G </dev/urandom > randomfile4
+      # - name: random data
+      #   run: |
+      #     head -c 5G </dev/urandom > randomfile4
 
-      - name: Evict cache4
-        id: evict-cache4
-        uses: actions/cache@v2
-        with:
-          path: |
-            randomfile4
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+      # - name: Evict cache4
+      #   id: evict-cache4
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       randomfile4
+      #     key: ${{ runner.os }}-go-${{ env.GO_VERSION }}--evict-cache4
 
-
-      - uses: actions/setup-go@v2
-        with:
-          go-version: ${{ env.GO_VERSION }}
+      # - uses: actions/setup-go@v2
+      #   with:
+      #     go-version: ${{ env.GO_VERSION }}
 
       - name:
         run: |
