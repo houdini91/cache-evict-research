@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: matrix
         run: |
-          range=$(seq 0 60)
+          range=$(seq 0 1000)
           LIST=$(jq -ncR '[inputs]' <<< "$range")
           echo $LIST
           echo "test name=value::$LIST"
