@@ -47,67 +47,42 @@ jobs:
           echo ${{needs.setup.outputs.matrix}}
 
 
-  evict-cache:
-    needs: [reserve-cache,setup]
+  evict-cache_large:
+    needs: [reserve-cache]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.setup.outputs.matrix)}}
         size:
           - 5G
           - 4G
           - 3G
           - 2G
           - 1G
-          # - 800M
-          # - 400M
-          # - 100M
-          # - 50M
-          # - 40M
-          # - 30M
-          # - 20M
-          # - 19M
-          # - 18M
-          # - 17M
-          # - 16M
-          # - 15M
-          # - 14M
-          # - 13M
-          # - 12M
-          # - 11M
-          # - 10M
-          # - 9M
-          # - 8M
-          # - 7M
-          # - 6M
-          # - 5M
-          # - 4M
-          # - 3M
-          # - 2M
-          # - 1M
-          # - 500
-          # - 200
-          # - 100
-          # - 50
-          # - 30
-          # - 20
-          # - 10
-          # - 9
-          # - 8
-          # - 7
-          # - 6
-          # - 5
-          # - 4
-          # - 3
-          # - 2
-          # - 1
-          # - 0
         
     steps:
       - name: random data
         run: |
+          head -c ${{ matrix.size }} </dev/urandom > randomfile
+
+      - name: Evict cache
+        id: evict-cache
+        uses: actions/cache@v2
+        with:
+          # upload-chunk-size: 10737418240
+          path: |
+            randomfile
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.size }}
+
+  evict-cache_small:
+    needs: [reserve-cache,setup]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value: ${{fromJson(needs.setup.outputs.matrix)}}
+    steps:
+      - name: random data
+        run: |
           head -c 100M </dev/urandom > randomfile
-          head -c -${{ matrix.size }} </dev/urandom >> randomfile
 
       - name: Evict cache
         id: evict-cache
@@ -118,9 +93,6 @@ jobs:
             randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.value }}
 
-      - name: random data
-        run: |
-          head -c 5G </dev/urandom > randomfile2
 
   test-cache:
     needs: [evict-cache]
