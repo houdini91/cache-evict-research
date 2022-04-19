@@ -8,7 +8,7 @@ env:
   GO_VERSION: "1.18"
 
 jobs:
-  evict-cache:
+  reserve-cache:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,6 +23,15 @@ jobs:
           path: |
             ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
+  evict-cache:
+    needs: [reserve-cache]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: random data
         run: |
@@ -73,8 +82,8 @@ jobs:
         run: |
           head -c 5G </dev/urandom > randomfile4
 
-      - name: Evict cache3
-        id: evict-cache3
+      - name: Evict cache4
+        id: evict-cache4
         uses: actions/cache@v2
         with:
           # upload-chunk-size: 10737418240
@@ -83,8 +92,8 @@ jobs:
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
 
-      - name: Evict cache4
-        id: evict-cache4
+      - name: Evict cache5
+        id: evict-cache5
         uses: actions/cache@v2
         with:
           # upload-chunk-size: 10737418240
