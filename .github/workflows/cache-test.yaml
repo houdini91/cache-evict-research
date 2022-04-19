@@ -32,10 +32,19 @@ jobs:
       - id: matrix
         run: |
           range=$(seq 0 60)
-          echo $range
           LIST=$(jq -ncR '[inputs]' <<< "$range")
           echo $LIST
           echo '::set-output name=value::$LIST'
+
+  debug-matrix:
+    needs: [setup]
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: random data
+        run: |
+          echo ${{ needs.setup.outputs.matrix }}
+
 
   evict-cache:
     needs: [reserve-cache,setup]
