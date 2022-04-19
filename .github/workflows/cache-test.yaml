@@ -27,11 +27,12 @@ jobs:
   evict-cache:
     needs: [reserve-cache]
     runs-on: ubuntu-latest
-    matrix:
-      size:
-        # list your packages here
-        - 1M
-        - 3M
+    strategy:
+      matrix:
+        size:
+          # list your packages here
+          - 1M
+          - 3M
         
     steps:
       - name: Checkout
