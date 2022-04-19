@@ -31,8 +31,30 @@ jobs:
       matrix:
         size:
           # list your packages here
-          - 1M
+          - 5G
+          - 4G
+          - 800M
+          - 400M
+          - 100M
+          - 50M
+          - 40M
+          - 30M
+          - 20M
+          - 10M
+          - 5M
+          - 4M
           - 3M
+          - 2M
+          - 1M
+          - 500
+          - 200
+          - 100
+          - 50
+          - 30
+          - 20
+          - 10
+          - 1
+          - 0
         
     steps:
       - name: random data
