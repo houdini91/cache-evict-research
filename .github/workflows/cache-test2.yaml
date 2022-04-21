@@ -16,10 +16,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: random data
+        run: |
+          head -c 1M </dev/urandom > randomfile
+
       - name: Evict cache
         id: go-cache
         uses: houdini91/cache@main
         with:
           path: |
-            ~/go/pkg/mod
+            randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}

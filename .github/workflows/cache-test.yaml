@@ -62,7 +62,7 @@ jobs:
     steps:
       - name: random data
         run: |
-          head -c ${{ matrix.size }} </dev/urandom > randomfile
+          head -c 1M </dev/urandom > randomfile
 
       - name: Evict cache
         id: evict-cache
