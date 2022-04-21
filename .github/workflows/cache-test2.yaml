@@ -20,10 +20,19 @@ jobs:
         run: |
           head -c 10M </dev/urandom > randomfile
 
+
       - name: Evict cache
         id: go-cache
-        uses: houdini91/cache@main
+        uses: actions/cache@v2
         with:
           path: |
             randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-test
+
+      # - name: Evict cache
+      #   id: go-cache
+      #   uses: houdini91/cache@main
+      #   with:
+      #     path: |
+      #       randomfile
+      #     key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
