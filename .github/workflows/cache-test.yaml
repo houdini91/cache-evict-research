@@ -73,25 +73,25 @@ jobs:
             randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.size }}
 
-  evict-cache-small:
-    needs: [reserve-cache,setup]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        value: ${{fromJson(needs.setup.outputs.matrix)}}
-    steps:
-      - name: random data
-        run: |
-          head -c 100M </dev/urandom > randomfile
+  # evict-cache-small:
+  #   needs: [reserve-cache,setup]
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       value: ${{fromJson(needs.setup.outputs.matrix)}}
+  #   steps:
+  #     - name: random data
+  #       run: |
+  #         head -c 100M </dev/urandom > randomfile
 
-      - name: Evict cache
-        id: evict-cache
-        uses: actions/cache@v2
-        with:
-          # upload-chunk-size: 10737418240
-          path: |
-            randomfile
-          key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.value }}
+  #     - name: Evict cache
+  #       id: evict-cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         # upload-chunk-size: 10737418240
+  #         path: |
+  #           randomfile
+  #         key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-evict-cache-${{ matrix.value }}
 
 
   # test-cache:
