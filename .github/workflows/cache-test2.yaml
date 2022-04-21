@@ -16,23 +16,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: random data
-        run: |
-          head -c 100M </dev/urandom > randomfile100
 
-
-      # - name: Evict cache
-      #   id: go-cache
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       randomfile
-      #     key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
       - name: Evict cache
         id: go-cache
-        uses: houdini91/cache@main
+        uses: actions/cache@v2
         with:
           path: |
-            randomfile100
+            randomfile
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
+      # - name: random data
+      #   run: |
+      #     head -c 100M </dev/urandom > randomfile100
+
+      # - name: Evict cache
+      #   id: go-cache
+      #   uses: houdini91/cache@main
+      #   with:
+      #     path: |
+      #       randomfile100
+      #     key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
