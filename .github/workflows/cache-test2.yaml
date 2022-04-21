@@ -18,7 +18,7 @@ jobs:
 
       - name: random data
         run: |
-          head -c 1M </dev/urandom > randomfile
+          head -c 10M </dev/urandom > randomfile
 
       - name: Evict cache
         id: go-cache
