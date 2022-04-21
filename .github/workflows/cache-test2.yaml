@@ -18,7 +18,7 @@ jobs:
 
       - name: random data
         run: |
-          head -c 10M </dev/urandom > randomfile
+          head -c 2M </dev/urandom > randomfile2
 
 
       # - name: Evict cache
@@ -34,5 +34,5 @@ jobs:
         uses: houdini91/cache@main
         with:
           path: |
-            randomfile
+            randomfile2
           key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
